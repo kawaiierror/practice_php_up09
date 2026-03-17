@@ -1,0 +1,22 @@
+{
+    "name": "kawaiierror/practice2_pirvp",
+    "description": "practice for pirvp",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kawaiierror"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4 | ^8.2"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "core/Src/",
+            "": "app/"
+        }
+    }
+}
