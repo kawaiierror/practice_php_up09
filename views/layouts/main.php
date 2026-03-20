@@ -16,7 +16,7 @@
 <body>
 <header>
     <nav>
-        <a class="header_nav_link" href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
+        <a class="header_nav_link" href="<?= app()->route->getUrl('/') ?>">Главная</a>
         <?php
         if (!app()->auth::check()):
             ?>
@@ -26,6 +26,7 @@
         else:
             ?>
             <a class="header_nav_link" href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
+            <a class="header_nav_link" href="<?= app()->route->getUrl('/profile') ?>">Профиль</a>
         <?php
         endif;
         ?>

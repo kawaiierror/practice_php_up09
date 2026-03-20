@@ -36,6 +36,22 @@ h2 {
     color: #393c37;
     text-align: center;
 }
+/*h3 {*/
+/*    !*text-align: center;*!*/
+/*    color: #393c37;*/
+/*    padding-bottom: 20px;*/
+/*}*/
+
+.profile_field{
+        margin-left: 8vw;
+        padding: 10px;
+}
+
+.message_errors {
+    text-align: center;
+    color: #393c37;
+    padding-bottom: 20px;
+}
 
 form {
     display: flex;
@@ -60,7 +76,6 @@ input {
 button {
     width: 25vw;
     padding: 10px;
-    cursor: pointer;
     background-color: chocolate;
     color: white;
     border: none;

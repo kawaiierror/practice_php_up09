@@ -3,6 +3,11 @@
 <form method="post">
     <label>Введите имя <input type="text" name="name" placeholder="имя"></label>
     <label>Введите логин <input type="text" name="login" placeholder="логин"></label>
+    <label>Введите фамилию <input type="text" name="lastname" placeholder="фамилия"></label>
+    <label>Введите отчество <input type="text" name="patronym" placeholder="отчество"></label>
+    <label>Введите адрес <input type="text" name="adress" placeholder="город, улица, дом, квартира"></label>
+    <label>Введите номер телефона <input type="text" name="phone" placeholder="+7 (000) 000 00 00"></label>
+    <label>Введите роль <input type="text" name="role" placeholder="администратор"></label>
     <label>Введите пароль <input type="password" name="password" placeholder="пароль"></label>
     <button>Зарегистрироваться</button>
 </form>

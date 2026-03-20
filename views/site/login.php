@@ -1,5 +1,5 @@
 <h2>Авторизация</h2>
-<h3><?= $message ?? ''; ?></h3>
+<h3 class="message_errors"><?= $message ?? ''; ?></h3>
 
 <h3><?= app()->auth->user()->name ?? ''; ?></h3>
 <?php
