@@ -85,3 +85,10 @@ button {
 button:hover {
     background-color: #b86009;
 }
+
+.admin_marker {
+    color: darkorange;
+}
+.user_marker {
+    color: cornflowerblue;
+}
