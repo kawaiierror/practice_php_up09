@@ -12,4 +12,5 @@ Route::add('GET', '/', [Controller\Site::class, 'hello']);
 Route::add(['GET', 'POST'], '/signup', [Controller\Site::class, 'signup']);
 Route::add(['GET', 'POST'], '/login', [Controller\Site::class, 'login']);
 Route::add('GET', '/logout', [Controller\Site::class, 'logout'])->middleware('auth');
-Route::add('GET', '/profile', [Controller\Site::class, 'profile']); //новая страица
+Route::add('GET', '/profile', [Controller\Site::class, 'profile'])->middleware('auth'); //новая страица
+Route::add(['GET', 'POST'], '/users_list', [Controller\Admin::class, 'users_list'])->middleware('admin');
