@@ -1,4 +1,4 @@
 <?php
 ?>
-<h1>403</h1>
-<h2>Доступ запрещен</h2>
+<h1 class="error_number">403</h1>
+<h2 class="error_title">Доступ запрещен</h2>

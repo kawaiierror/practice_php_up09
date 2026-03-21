@@ -28,10 +28,14 @@
             <a class="header_nav_link" href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
             <a class="header_nav_link" href="<?= app()->route->getUrl('/profile') ?>">Профиль</a>
 
-            <a class="header_nav_link" href="<?= app()->route->getUrl('/users_list') ?>">Управление пользователями</a>
         <?php
         endif;
         ?>
+        <?php
+        if (app()->auth::user()->role === 'администратор'):
+        ?>
+            <a class="header_nav_link" href="<?= app()->route->getUrl('/users_list') ?>">Управление пользователями</a>
+        <?php endif; ?>
     </nav>
 </header>
 <main>

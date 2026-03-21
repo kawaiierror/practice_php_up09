@@ -13,8 +13,5 @@ class AuthMiddleware
         if (!Auth::check()) {
             app()->route->redirect('/login');
         }
-        elseif (app()->auth::check() && app()->auth::user()->role === 'администратор') {
-            app()->route->redirect('/');
-        }
     }
 }

@@ -60,6 +60,12 @@ form {
     justify-content: center;
     align-items: center;
 }
+.form_update {
+    padding: 10px;
+    display: flex;
+    /*flex-direction: row;*/
+    gap: 5px;
+}
 label {
     display: flex;
     flex-direction: column;
@@ -74,16 +80,23 @@ input {
     border: 1px solid #ccc;
 }
 button {
-    width: 25vw;
-    padding: 10px;
     background-color: chocolate;
     color: white;
     border: none;
     border-radius: 5px;
 }
 
+.change_role_button {
+    padding: 2px 50px 2px 50px;
+}
+
 button:hover {
     background-color: #b86009;
+}
+
+.user_button {
+    width: 25vw;
+    padding: 10px;
 }
 
 .admin_marker {
@@ -91,4 +104,25 @@ button:hover {
 }
 .user_marker {
     color: cornflowerblue;
+}
+
+.error_number {
+    margin: 20px;
+    text-align: center;
+    font-size: 80pt;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.users_list_table {
+    width: 90vw;
+    margin-left: 5vw;
+}
+th {
+    padding: 5px;
+}
+td {
+    padding: 5px;
 }

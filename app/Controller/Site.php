@@ -53,6 +53,7 @@ class Site
         return new View('site.profile');
     }
 
+
 //    public function profile(): string
 //    {
 //        return new View('site.profile', ['message' => 'Hello,']);
