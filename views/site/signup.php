@@ -8,11 +8,6 @@
     <label>Введите адрес <input type="text" name="adress" placeholder="город, улица, дом, квартира"></label>
     <label>Введите номер телефона <input type="text" name="phone" placeholder="+7 (000) 000 00 00"></label>
     <label for="role">Выберите роль</label>
-    <select name="role" id="role">
-        <option>читатель</option>
-        <option>библиотекарь</option>
-        <option>администратор</option>
-    </select>
     <label>Введите пароль <input type="password" name="password" placeholder="пароль"></label>
     <button class="user_button">Зарегистрироваться</button>
 </form>
