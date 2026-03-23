@@ -15,4 +15,4 @@ Route::add('GET', '/logout', [Controller\Site::class, 'logout'])->middleware('au
 Route::add('GET', '/profile', [Controller\Site::class, 'profile'])->middleware('auth');
 Route::add(['GET', 'POST'], '/users_list', [Controller\Admin::class, 'users_list'])->middleware('admin');
 Route::add('GET', '/error403', [Controller\Error::class, 'error403']);
-Route::add('POST', '/update_role', [Controller\Admin::class, 'update_role'])->middleware('admin');
+Route::add('POST', '/update_role', [Controller\Admin::class, 'update_role'])->middleware('admin', 'checkNotSelfUpdate');
