@@ -28,7 +28,7 @@
             <td><?= $user->login ?></td>
             <td><?= $user->role ?></td>
             <td>
-                <form action="/update_role" method="POST" class="form_update">
+                <form action="<?= app()->route->getUrl('/update_role') ?>" method="POST" class="form_update">
                     <input type="hidden" name="user_id" value="<?= $user->id ?>">
 
                     <select name="role">

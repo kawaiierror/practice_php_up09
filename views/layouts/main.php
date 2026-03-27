@@ -6,7 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pirvp MVC</title>
-    <link rel="stylesheet" href="../../public/css/main.css"">
+<!--   ↓ ВОТ ЭТО ОСТАВЬ ↓-->
+    <link rel="stylesheet" href="<?= app()->route->getUrl('/css/main.css') ?>">
+<!--    ↑ ВОТ ЭТО ОСТАВЬ ↑-->
+
 <!--    <style>-->
 <!--        a {-->
 <!--            text-decoration: none;-->
@@ -31,10 +34,10 @@
         <?php
         endif;
         ?>
-        <?php
-        if (app()->auth::user()->role === 'администратор'):
-        ?>
-            <a class="header_nav_link" href="<?= app()->route->getUrl('/users_list') ?>">Управление пользователями</a>
+        <?php if (app()->auth->check()): ?>
+            <?php if (app()->auth::user()->role === 'администратор'):?>
+                <a class="header_nav_link" href="<?= app()->route->getUrl('/users_list') ?>">Управление пользователями</a>
+            <?php endif; ?>
         <?php endif; ?>
     </nav>
 </header>
