@@ -28,8 +28,9 @@
         <?php
         else:
             ?>
-            <a class="header_nav_link" href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
+            <a class="header_nav_link" href="<?= app()->route->getUrl('/book_list') ?>">Каталог книг</a>
             <a class="header_nav_link" href="<?= app()->route->getUrl('/profile') ?>">Профиль</a>
+            <a class="header_nav_link" href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
 
         <?php
         endif;
