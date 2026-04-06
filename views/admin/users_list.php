@@ -29,6 +29,7 @@
             <td><?= $user->role ?></td>
             <td>
                 <form action="<?= app()->route->getUrl('/update_role') ?>" method="POST" class="form_update">
+                    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
                     <input type="hidden" name="user_id" value="<?= $user->id ?>">
 
                     <select name="role">

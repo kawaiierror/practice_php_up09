@@ -126,3 +126,9 @@ th {
 td {
     padding: 5px;
 }
+.book-grid {
+    margin-top: 10px;
+}
+.book-item {
+    padding: 15px;
+}

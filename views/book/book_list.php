@@ -1,4 +1,4 @@
-<h1>Каталог книг</h1>
+<h2>Каталог книг</h2>
 
 <div class="book-grid">
     <?php foreach ($books as $book): ?>
@@ -13,7 +13,9 @@
             <p><b>Категория: </b> <?= $book->category->name ?? 'Без категории' ?></p>
             <p><b>Цена: </b> <?= $book->price ?> руб.</p>
 
-            <a href="/book/view?id=<?= $book->id ?>">Подробнее</a>
+            <a href="<?= app()->route->getUrl('/book_detail') ?>?id=<?= $book->isbn ?>">
+                Посмотреть подробнее
+            </a>
         </div>
     <?php endforeach; ?>
 </div>
