@@ -132,3 +132,47 @@ td {
 .book-item {
     padding: 15px;
 }
+
+.book_btn {
+    display: inline-block;
+    margin: 7px 5px 7px 5px;
+    text-align: center;
+    background-color: chocolate;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 50px 5px 50px;
+    width: 100%;
+}
+
+.book_details {
+    margin-left: 8vw;
+    padding: 10px;
+    width: 450px;
+}
+.book_details_title {
+    margin: 15px 0 10px 0
+}
+
+.delete {
+    background-color: crimson;
+}
+
+.create {
+    margin-left: 9vw;
+    width: 12%;
+    background-color: dodgerblue;
+}
+
+.book_detail_img {
+    margin: 10px 0 10px 0;
+}
+
+.book_grid {
+    margin-left: 8vw;
+}
+
+.create_book_btn {
+    font-size: 20px;
+    padding: 7px 100px 7px 100px;
+}

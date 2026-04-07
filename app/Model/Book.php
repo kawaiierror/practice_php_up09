@@ -38,11 +38,4 @@ class Book extends Model
     }
 
 
-//    public function getImageUrlAttribute()
-//    {
-//        if ($this->image) {
-//            return asset('images/covers/' . $this->image);
-//        }
-//        return asset('images/covers/no-image.png'); // Заглушка, если фото нет
-//    }
 }

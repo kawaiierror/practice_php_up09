@@ -2,21 +2,32 @@
 
 
 <?php if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
-    <a class="delete_btn" href="<?= app()->route->getUrl('/add_book') ?>">Создать книгу</a>
+    <a class="book_btn create" href="<?= app()->route->getUrl('/add_book') ?>">Создать книгу</a>
 <?php endif; ?>
 
-<div class="book-grid">
+<div class="book_grid">
     <?php foreach ($books as $book): ?>
         <div class="book-item">
-            <!-- Используем объектные свойства модели -->
-<!--            <img src="--><?php //= $book->image ?><!--" alt="--><?php //= $book->title ?><!--" width="100">-->
+
+            <?php if ($book->image): ?>
+                <img src="/practice_php_up09/public<?= $book->image ?>" alt="<?= $book->book_name ?>" width="250">
+
+            <?php else: ?>
+                <!--                <img src="/path/to/no-image.png" alt="Нет фото" width="150">-->
+                <p>нет фото</p>
+            <?php endif; ?>
 
             <h4><?= $book->book_name ?></h4>
-
             <p><b>Автор: </b>  <?= $book->author->name ?? '' ?>
                 <?= $book->author->lastname ?? 'Неизвестен' ?></p>
             <p><b>Категория: </b> <?= $book->category->name ?? 'Без категории' ?></p>
             <p><b>Цена: </b> <?= $book->price ?> руб.</p>
+            <?php if ($book->is_new == 1): ?>
+                <span style="color: green; font-weight: bold; text-transform: uppercase; font-size: 0.8em;">
+                Новинка!
+            </span>
+            <?php endif; ?>
+            <br>
 
             <a href="<?= app()->route->getUrl('/book_detail') ?>?id=<?= $book->isbn ?>">
                 Посмотреть подробнее
