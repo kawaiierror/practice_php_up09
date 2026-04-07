@@ -1,5 +1,10 @@
 <h2>Каталог книг</h2>
 
+
+<?php if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
+    <a class="delete_btn" href="<?= app()->route->getUrl('/add_book') ?>">Создать книгу</a>
+<?php endif; ?>
+
 <div class="book-grid">
     <?php foreach ($books as $book): ?>
         <div class="book-item">

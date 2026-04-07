@@ -7,6 +7,9 @@ use Model\Category;
 
 use Src\View;
 use Src\Request;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class BookController
 {
@@ -35,19 +38,81 @@ class BookController
 //        ]);
         return new View('book.book_detail', ['book' => $book]);
     }
+    public function create_book(Request $request): string
+    {
+        $book_name   = $_POST['text'] ?? 'Без названия'; // Проверьте, что в HTML name="text"
+        $author_id   = $_POST['author_id'] ?? null;
+        $category_id = $_POST['category_id'] ?? null;
+        $annotation  = $_POST['annotation'] ?? 'Без описания';
 
-//    public function book_detail($id)
-//    {
-//        // Ищем книгу по ID из URL
-//        $book = Book::with(['author', 'category'])->find($id);
-//
-//        if (!$book) {
-//            // Если книга не найдена, можно вернуть 404 или редирект
-//            return abort(404);
-//        }
-//
-//        return view('book.book_detail', compact('book'));
-//    }
+        // 2. Валидация: если нет ID автора или категории, БД выдаст ошибку ForeignKey
+        if (!$author_id || !$category_id) {
+            return "Ошибка: Не переданы ID автора или категории. Проверьте форму.";
+        }
+
+        // 3. Логика загрузки файла
+        $url = null;
+        if (isset($_FILES['cover_image']) && $_FILES['cover_image']['error'] === UPLOAD_ERR_OK) {
+            $file = $_FILES['cover_image'];
+            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $fileName = time() . '.' . $extension;
+
+            // Путь от контроллера до папки public
+            $uploadDir = __DIR__ . '/../../public/uploads/cover_images/';
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $targetPath = $uploadDir . $fileName;
+
+            if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+                // Этот путь запишется в базу данных
+                $url = '/uploads/cover_images/' . $fileName;
+            }
+        }
+
+        // 4. Создание записи в БД
+        $book = new \Model\Book();
+        $book->book_name   = $book_name;
+        $book->author_id   = $author_id;
+        $book->category_id = $category_id;
+        $book->annotation  = $annotation;
+//        $book->year        = date('Y');
+        $book->image       = $url;
+
+        // 5. Сохранение
+        $book->save();
+
+        // Возвращаем объект книги или редирект
+        return $book;
+
+    }
+    public function show_create_form(): string
+    {
+        // Здесь укажите путь к вашему файлу с HTML-формой
+        // Например, если файл в /views/book/create.php:
+        return new \Src\View('book.add_book');
+    }
+
+    public function delete_book(Request $request): void
+    {
+        $id = $request->id;
+
+        // 1. Находим конкретную книгу по ID
+        $book = \Model\Book::find($id);
+
+        // 2. Если книга найдена — удаляем её
+        if ($book) {
+            $book->delete();
+        }
+
+        app()->route->redirect('/book_list'); // Возвращаем на список книг после удаления
+
+    }
+
+
+
 
 //    public function store(Request $request)
 //    {
