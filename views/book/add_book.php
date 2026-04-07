@@ -1,25 +1,41 @@
 <?php
 ?>
 <h2>Добавление книги</h2>
-<form action="/practice_php_up09/add_book" method="POST" enctype="multipart/form-data">
+<form action="<?= app()->route->getUrl('/add_book') ?>" method="POST" enctype="multipart/form-data">
     <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
 
     <input type="text" name="book_name" placeholder="Название книги" required>
 
-    <!-- Выбор автора (в реальном проекте здесь должен быть цикл по авторам из БД) -->
+    <label>Автор:</label>
     <select name="author_id" required>
         <option value="">Выберите автора</option>
-        <option value="1">Автор №1</option>
+        <?php foreach ($authors as $author): ?>
+            <option value="<?= $author->author_id ?>">
+                <?= $author->name ?> <?= $author->lastname ?>
+            </option>
+        <?php endforeach; ?>
     </select>
 
-    <!-- Выбор категории -->
+    <br><br>
+
+    <label>Категория:</label>
     <select name="category_id" required>
         <option value="">Выберите категорию</option>
-        <option value="1">Категория №1</option>
+        <?php foreach ($categories as $category): ?>
+            <option value="<?= $category->category_id ?>">
+                <?= $category->name ?>
+            </option>
+        <?php endforeach; ?>
     </select>
 
     <input type="text" name="annotation" placeholder="Описание" required>
+    <input type="number" name="price" placeholder="Цена" required>
+    <input type="number" name="year" placeholder="Год издания" required>
+    <select name="is_new" required>
+        <option value="0">Не новинка</option>
+        <option value="1">Новинка</option>
+    </select>
 
     <input type="file" name="cover_image">
-    <button type="submit">Создать</button>
+    <button class="create_book_btn" type="submit">Создать</button>
 </form>
