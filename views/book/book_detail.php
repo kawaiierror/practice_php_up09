@@ -28,9 +28,7 @@
 
     <br>
     <a href="<?= app()->route->getUrl('/book_list') ?>">Назад в каталог</a>
-    <?php if (app()->auth->check()): ?>
-        <?php if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
-            <a class="delete_btn" href="<?= app()->route->getUrl('/users_list') ?>">Удалить книгу</a>
-        <?php endif; ?>
+    <?php if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
+        <a class="delete_btn" href="<?= app()->route->getUrl('/delete_book') ?>?id=<?= $book->isbn ?>">Удалить книгу</a>
     <?php endif; ?>
 </div>

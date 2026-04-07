@@ -6,6 +6,7 @@ return [
         'auth' => \Middlewares\AuthMiddleware::class,
         'admin' => \Middlewares\AdminMiddleware::class,
         'checkNotSelfUpdate' => \Middlewares\CheckNotSelfUpdate::class,
+        'librarian' => \Middlewares\LibrarianMiddleware::class,
     ],
     'validators' => [
         'required' => \Validators\RequireValidator::class,

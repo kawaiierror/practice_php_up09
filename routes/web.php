@@ -14,5 +14,8 @@ Route::add('GET', '/book_list', [Controller\BookController::class, 'book_list'])
 //Route::add('GET', '/book_detail/{id}', [Controller\BookController::class, 'book_detail']);
 Route::add('GET', '/book_detail', [Controller\BookController::class, 'book_detail'])->middleware('auth');
 
+Route::add('GET', '/add_book', [Controller\BookController::class, 'show_create_form']);
+Route::add('POST', '/add_book', [Controller\BookController::class, 'create_book']);
+Route::add('GET', '/delete_book', [Controller\BookController::class, 'delete_book'])->middleware('librarian');
 //Route::get('/view-book/{id}', [Controller\BookController::class, 'book_detail'])->name('book.book_detail');
 
