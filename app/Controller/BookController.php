@@ -109,4 +109,28 @@ class BookController
         app()->route->redirect('/book_list'); // редирект на список книг после удаления
 
     }
+
+    public function show_category_form(): string
+    {
+        return new \Src\View('book.add_category');
+    }
+    public function create_category(Request $request): void
+    {
+        $name = $_POST['name'] ?? null;
+
+        if ($name) {
+            $exists = \Model\Category::where('name', $name)->exists();
+
+            if ($exists) {
+                app()->route->redirect('/category_create');
+                return;
+            }
+
+            $category = new \Model\Category();
+            $category->name = $name;
+            $category->save();
+        }
+
+        app()->route->redirect('/book_list');
+    }
 }

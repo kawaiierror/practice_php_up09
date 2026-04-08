@@ -79,4 +79,22 @@ class LoanController {
         // Исправляем имя шаблона на loan_list_all
         return new \Src\View('loan.loan_list_all', ['loans' => $loans]);
     }
+    public function delete_loan(Request $request)
+    {
+        $loan_id = $request->id;
+        $loan = \Model\Loan::find($loan_id);
+
+        if ($loan) {
+            // 1. Находим книгу через связь и меняем статус
+            $book = $loan->book;
+            if ($book) {
+                $book->update(['status' => 'доступна']);
+            }
+
+            // 2. Удаляем саму заявку
+            $loan->delete();
+        }
+
+        app()->route->redirect('/loan_list_all');
+    }
 }

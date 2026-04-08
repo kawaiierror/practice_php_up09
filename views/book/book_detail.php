@@ -34,6 +34,22 @@
         <p><?= $book->annotation ?></p>
     </div>
 
+    <div class="book_info">
+        <p><strong>Об авторе</strong></p>
+        <p>Имя:
+            <?= $book->author->name ?? '' ?>
+        </p>
+        <p>Фамилия:
+            <?= $book->author->lastnamename ?? '' ?>
+        </p>
+        <p>Год рождения:
+            <?= $book->author->year_of_birth ?? '' ?>
+        </p>
+        <?php if ($book->author->year_of_death): ?>
+            <p>Год смерти:<?= $book->author->year_of_death ?></p>
+        <?php endif; ?>
+    </div>
+
 
 <!--    --><?php //if (app()->auth::user()->role === 'читатель'):?>
     <a class="book_btn" href="<?= app()->route->getUrl('/create_loan') ?>?isbn=<?= $book->isbn ?>">
