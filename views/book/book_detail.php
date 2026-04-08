@@ -36,7 +36,9 @@
 
 
 <!--    --><?php //if (app()->auth::user()->role === 'читатель'):?>
-        <a class="book_btn" href="<?= app()->route->getUrl('/loan_message') ?>">Забронировать</a>
+    <a class="book_btn" href="<?= app()->route->getUrl('/create_loan') ?>?isbn=<?= $book->isbn ?>">
+        Забронировать
+    </a>
 <!--    --><?php //endif; ?>
     <?php if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
         <a class="book_btn delete" href="<?= app()->route->getUrl('/delete_book') ?>?id=<?= $book->isbn ?>">Удалить книгу</a>

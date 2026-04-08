@@ -37,5 +37,18 @@ class Book extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($book) {
+            // Удаляется заявка перед удалением книги
+            $book->loans()->delete();
+        });
+    }
+    public function loans()
+    {
+        return $this->hasMany(Loan::class, 'isbn', 'isbn');
+    }
+
 
 }

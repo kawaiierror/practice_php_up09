@@ -27,6 +27,17 @@
                 Новинка!
             </span>
             <?php endif; ?>
+            <p><b>Статус: </b>
+                <span class="status-badge">
+        <?= $book->status ?? 'доступна' ?>
+    </span>
+            </p>
+
+            <?php if ($book->status !== 'забронирована'): ?>
+                <p>В наличии</p>
+            <?php else: ?>
+                <p>Уже занята</p>
+            <?php endif; ?>
             <br>
 
             <a href="<?= app()->route->getUrl('/book_detail') ?>?id=<?= $book->isbn ?>">
