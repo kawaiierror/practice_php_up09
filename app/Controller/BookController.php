@@ -77,6 +77,7 @@ class BookController
         $book->price       = $price;
         $book->year       = $year;
         $book->is_new       = $is_new;
+        $book->status      = 'доступна';
 
 
         $book->save();
