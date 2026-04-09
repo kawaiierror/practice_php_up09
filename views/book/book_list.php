@@ -3,7 +3,12 @@
 
 <?php if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
     <a class="book_btn create" href="<?= app()->route->getUrl('/add_book') ?>">Создать книгу</a>
+    <br>
+    <a class="book_btn create" href="<?= app()->route->getUrl('/add_category') ?>">Создать категорию</a>
+    <br>
+    <a class="book_btn create" href="<?= app()->route->getUrl('/') ?>">Создать автора</a>
 <?php endif; ?>
+
 
 <div class="book_grid">
     <?php foreach ($books as $book): ?>
@@ -27,16 +32,11 @@
                 Новинка!
             </span>
             <?php endif; ?>
-            <p><b>Статус: </b>
-                <span class="status-badge">
-        <?= $book->status ?? 'доступна' ?>
-    </span>
-            </p>
 
             <?php if ($book->status !== 'забронирована'): ?>
                 <p>В наличии</p>
             <?php else: ?>
-                <p>Уже занята</p>
+                <p style="color: #dc3545"><strong>Уже занята</strong></p>
             <?php endif; ?>
             <br>
 
