@@ -3,7 +3,7 @@
 <div class="book_details">
     <h1 class="book_details_title"><?= $book->book_name ?></h1>
     <?php if ($book->image): ?>
-        <img class="book_detail_img" src="/practice_php_up09/public<?= $book->image ?>" alt="<?= $book->book_name ?>" width="450">
+        <img class="book_detail_img" src="<?= app()->route->getUrl('/public') ?><?=$book->image ?>" alt="<?= $book->book_name ?>" width="450">
 
     <?php else: ?>
         <!--                <img src="/path/to/no-image.png" alt="Нет фото" width="150">-->
@@ -40,7 +40,7 @@
             <?= $book->author->name ?? '' ?>
         </p>
         <p>Фамилия:
-            <?= $book->author->lastnamename ?? '' ?>
+            <?= $book->author->lastname ?? '' ?>
         </p>
         <p>Год рождения:
             <?= $book->author->year_of_birth ?? '' ?>
