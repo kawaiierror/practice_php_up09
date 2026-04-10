@@ -122,13 +122,44 @@ class BookController
             $exists = \Model\Category::where('name', $name)->exists();
 
             if ($exists) {
-                app()->route->redirect('/category_create');
+                app()->route->redirect('/add_category');
                 return;
             }
 
             $category = new \Model\Category();
             $category->name = $name;
             $category->save();
+        }
+
+        app()->route->redirect('/book_list');
+    }
+
+    public function show_author_form(): string
+    {
+        return new \Src\View('book.add_author');
+    }
+    public function create_author(Request $request): void
+    {
+        $name = $_POST['name'] ?? null;
+        $lastname = $_POST['lastname'] ?? null;
+        $year_of_birth = $_POST['year_of_birth'] ?? null;
+        $year_of_death = $_POST['year_of_death'] ?? null;
+
+        if ($name) {
+            $exists = \Model\Author::where('name', $name)->exists();
+
+            if ($exists) {
+                app()->route->redirect('/add_author');
+                return;
+            }
+
+            $author = new \Model\Author();
+            $author->name = $name;
+            $author->lastname = $lastname;
+            $author->year_of_birth = $year_of_birth;
+            $author->year_of_death = $year_of_death;
+
+            $author->save();
         }
 
         app()->route->redirect('/book_list');

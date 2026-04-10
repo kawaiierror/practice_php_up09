@@ -6,7 +6,7 @@
     <br>
     <a class="book_btn create" href="<?= app()->route->getUrl('/add_category') ?>">Создать категорию</a>
     <br>
-    <a class="book_btn create" href="<?= app()->route->getUrl('/') ?>">Создать автора</a>
+    <a class="book_btn create" href="<?= app()->route->getUrl('/add_author') ?>">Создать автора</a>
 <?php endif; ?>
 
 
@@ -15,7 +15,7 @@
         <div class="book-item">
 
             <?php if ($book->image): ?>
-                <img src="/practice_php_up09/public<?= $book->image ?>" alt="<?= $book->book_name ?>" width="250">
+                <img src="<?= app()->route->getUrl('/public') ?><?=$book->image ?>" alt="<?= $book->book_name ?>" width="250">
 
             <?php else: ?>
                 <!--                <img src="/path/to/no-image.png" alt="Нет фото" width="150">-->

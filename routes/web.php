@@ -19,6 +19,9 @@ Route::add('GET', '/add_book', [Controller\BookController::class, 'show_create_f
 Route::add('POST', '/add_book', [Controller\BookController::class, 'create_book'])->middleware('librarian');
 Route::add('GET', '/add_category', [Controller\BookController::class, 'show_category_form'])->middleware('librarian');
 Route::add('POST', '/add_category', [Controller\BookController::class, 'create_category'])->middleware('librarian');
+Route::add('GET', '/add_author', [Controller\BookController::class, 'show_author_form'])->middleware('librarian');
+Route::add('POST', '/add_author', [Controller\BookController::class, 'create_author'])->middleware('librarian');
+
 Route::add('GET', '/delete_book', [Controller\BookController::class, 'delete_book'])->middleware('librarian');
 
 Route::add('GET', '/create_loan', [Controller\LoanController::class, 'create_loan'])->middleware('auth');
