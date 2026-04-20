@@ -29,7 +29,6 @@
     </select>
 
     <input type="text" name="annotation" placeholder="Описание" required>
-    <input type="number" name="price" placeholder="Цена" required>
     <input type="number" name="year" placeholder="Год издания" required>
     <select name="is_new" required>
         <option value="0">Не новинка</option>

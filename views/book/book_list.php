@@ -1,7 +1,8 @@
 <h2>Каталог книг</h2>
 
 
-<?php if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
+<?php //if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
+<?php if (app()->auth::user()->role === 'библиотекарь'):?>
     <a class="book_btn create" href="<?= app()->route->getUrl('/add_book') ?>">Создать книгу</a>
     <br>
     <a class="book_btn create" href="<?= app()->route->getUrl('/add_category') ?>">Создать категорию</a>
@@ -18,7 +19,6 @@
                 <img src="<?= app()->route->getUrl('/public') ?><?=$book->image ?>" alt="<?= $book->book_name ?>" width="250">
 
             <?php else: ?>
-                <!--                <img src="/path/to/no-image.png" alt="Нет фото" width="150">-->
                 <p>нет фото</p>
             <?php endif; ?>
 
@@ -26,7 +26,6 @@
             <p><b>Автор: </b>  <?= $book->author->name ?? '' ?>
                 <?= $book->author->lastname ?? 'Неизвестен' ?></p>
             <p><b>Категория: </b> <?= $book->category->name ?? 'Без категории' ?></p>
-            <p><b>Цена: </b> <?= $book->price ?> руб.</p>
             <?php if ($book->is_new == 1): ?>
                 <span style="color: green; font-weight: bold; text-transform: uppercase; font-size: 0.8em;">
                 Новинка!

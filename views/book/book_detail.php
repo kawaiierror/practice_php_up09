@@ -6,7 +6,6 @@
         <img class="book_detail_img" src="<?= app()->route->getUrl('/public') ?><?=$book->image ?>" alt="<?= $book->book_name ?>" width="450">
 
     <?php else: ?>
-        <!--                <img src="/path/to/no-image.png" alt="Нет фото" width="150">-->
         <p>нет фото</p>
     <?php endif; ?>
     <p><strong>Автор:</strong>
@@ -21,9 +20,6 @@
         <?= $book->year ?>
     </p>
 
-    <p><strong>Цена:</strong>
-        <?= $book->price ?> руб.
-    </p>
 
     <p><strong>Статус:</strong>
         <?= $book->status ?>
@@ -51,12 +47,12 @@
     </div>
 
 
-<!--    --><?php //if (app()->auth::user()->role === 'читатель'):?>
+    <?php if (app()->auth::user()->role === 'читатель'):?>
     <a class="book_btn" href="<?= app()->route->getUrl('/create_loan') ?>?isbn=<?= $book->isbn ?>">
         Забронировать
     </a>
-<!--    --><?php //endif; ?>
-    <?php if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
+    <?php endif; ?>
+    <?php if (app()->auth::user()->role === 'библиотекарь'):?>
         <a class="book_btn delete" href="<?= app()->route->getUrl('/delete_book') ?>?id=<?= $book->isbn ?>">Удалить книгу</a>
     <?php endif; ?>
     <br>
