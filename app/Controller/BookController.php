@@ -32,10 +32,6 @@ class BookController
 
         $book = \Model\Book::with(['author', 'category'])->find($id);
 
-//        return (new View())->render('book.book_detail', [
-//            'books' => $book,
-//            'title' => 'Каталог книг'
-//        ]);
         return new View('book.book_detail', ['book' => $book]);
     }
     public function create_book(Request $request): string
@@ -44,7 +40,6 @@ class BookController
         $author_id   = $_POST['author_id'] ?? null;
         $category_id = $_POST['category_id'] ?? null;
         $annotation  = $_POST['annotation'] ?? 'Без описания';
-        $price  = $_POST['price'] ?? 'Не указана';
         $year  = $_POST['year'] ?? 'Не указан';
         $is_new = $_POST["is_new"] ?? 'Не указано';
 
@@ -74,7 +69,6 @@ class BookController
         $book->category_id = $category_id;
         $book->annotation  = $annotation;
         $book->image       = $url;
-        $book->price       = $price;
         $book->year       = $year;
         $book->is_new       = $is_new;
         $book->status      = 'доступна';

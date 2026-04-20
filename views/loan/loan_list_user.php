@@ -4,7 +4,7 @@
 
     <div class="book_grid">
         <?php foreach ($loans as $loan): ?>
-            <?php $book = $loan->book; // Для удобства вынесем книгу в переменную ?>
+            <?php $book = $loan->book;?>
 
             <div class="loan_item">
                 <?php if ($book->image): ?>
@@ -19,16 +19,13 @@
                 <h4><?= $book->book_name ?></h4>
 
                 <p><b>Дата выдачи:</b> <?= $loan->issue_date ?></p>
-                <p><b>Вернуть до:</b> <span style="color: red;"><?= $loan->due_date ?></span></p>
-
+                <p><b>Вернуть до:</b> <span style="color: darkred;"><?= $loan->due_date ?></span></p>
+                <?php
+                if (strtotime($loan->due_date) < time()): ?>
+                    <b style="color: red; margin-left: 20px;">ПРОСРОЧЕНО</b>
+                <?php endif; ?>
                 <p><b>Автор: </b>  <?= $book->author->name ?? '' ?> <?= $book->author->lastname ?? 'Неизвестен' ?></p>
                 <p><b>Категория: </b> <?= $book->category->name ?? 'Без категории' ?></p>
-
-<!--                <div style="margin-top: 10px; border-top: 1px solid #eee; pt-2">-->
-<!--                    <a href="--><?php //= app()->route->getUrl('/book_detail') ?><!--?id=--><?php //= $book->isbn ?><!--">-->
-<!--                        Страница книги-->
-<!--                    </a>-->
-<!--                </div>-->
             </div>
         <?php endforeach; ?>
         <a href="<?= app()->route->getUrl('/book_list') ?>">Назад в каталог</a>

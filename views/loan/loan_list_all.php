@@ -45,4 +45,4 @@
     <p>Список заявок пуст.</p>
 <?php endif; ?>
 
-<a href="<?= app()->route->getUrl('/book_list') ?>">Назад в каталог</a>
+<a style="margin-left: 8vw;" href="<?= app()->route->getUrl('/book_list') ?>">Назад в каталог</a>

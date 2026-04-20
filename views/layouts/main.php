@@ -10,11 +10,6 @@
     <link rel="stylesheet" href="<?= app()->route->getUrl('/css/main.css') ?>">
 <!--    ↑ ВОТ ЭТО ОСТАВЬ ↑-->
 
-<!--    <style>-->
-<!--        a {-->
-<!--            text-decoration: none;-->
-<!--        }-->
-<!--    </style>-->
 </head>
 <body>
 <header>
@@ -29,12 +24,12 @@
         else:
             ?>
             <a class="header_nav_link" href="<?= app()->route->getUrl('/book_list') ?>">Каталог книг</a>
-<!--            --><?php //if (app()->auth::user()->role === 'читатель'):?>
+            <?php if (app()->auth::user()->role === 'читатель'):?>
             <a class="header_nav_link" href="<?= app()->route->getUrl('/loan_list_user') ?>">Взятые книги</a>
-<!--            --><?php //endif; ?>
+            <?php endif; ?>
             <a class="header_nav_link" href="<?= app()->route->getUrl('/profile') ?>">Профиль</a>
 
-            <?php if (app()->auth::user()->role === 'администратор' || app()->auth::user()->role === 'библиотекарь'):?>
+            <?php if (app()->auth::user()->role === 'библиотекарь'):?>
                 <a class="header_nav_link" href="<?= app()->route->getUrl('/loan_list_all') ?>">Управление заявками</a>
             <?php endif; ?>
             <?php if (app()->auth::user()->role === 'администратор'):?>
