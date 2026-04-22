@@ -1,5 +1,6 @@
 .idea
 vendor/
 composer.lock
+public/uploads/cover_images/
 access.log
 error.log
