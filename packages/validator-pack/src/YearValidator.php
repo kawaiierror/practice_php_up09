@@ -1,7 +1,6 @@
 <?php
 
-namespace Validators;
-
+namespace MyValidator;
 class YearValidator
 {
     protected string $message = 'Год должен состоять из цифр (максимум 4)';

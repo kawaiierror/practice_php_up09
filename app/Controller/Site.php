@@ -4,12 +4,10 @@ namespace Controller;
 
 use Model\Post;
 use Model\User;
-
 use Src\Auth\Auth;
-use Src\View;
 use Src\Request;
-
 use Src\Validator\Validator;
+use Src\View;
 
 class Site
 {
@@ -45,7 +43,7 @@ class Site
             }
 
             // Проверка кириллицы
-            $cyrillic = new \Validators\CyrillicValidator();
+            $cyrillic = new \MyValidator\CyrillicValidator();
             $errors = [];
 
             if (!$cyrillic->handle($request->name)) $errors['name'][] = 'Имя должно быть на кириллице';
