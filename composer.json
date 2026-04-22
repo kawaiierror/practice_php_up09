@@ -14,16 +14,23 @@
         }
     ],
     "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/validator-pack"
+        }
+    ],
     "require": {
         "php": "^8.1",
         "illuminate/database": "12.x-dev",
         "illuminate/events": "12.x-dev",
-        "nikic/fast-route": "^2.0@dev"
-
+        "nikic/fast-route": "^2.0@dev",
+        "my-library/validator": "*"
     },
     "autoload": {
         "psr-4": {
             "Src\\": "core/Src/",
+            "MyValidator\\": "packages/validator-pack/src/",
             "": "app/"
         }
     }

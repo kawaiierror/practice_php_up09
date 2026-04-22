@@ -1,0 +1,8 @@
+{
+  "name": "my-library/validator",
+  "autoload": {
+    "psr-4": {
+      "MyValidator\\": "src/"
+    }
+  }
+}

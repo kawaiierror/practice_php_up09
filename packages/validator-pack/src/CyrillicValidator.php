@@ -1,7 +1,6 @@
 <?php
 
-namespace Validators;
-
+namespace MyValidator;
 class CyrillicValidator
 {    protected string $message = 'Поле должно содержать только кириллицу, пробелы и дефисы';
 

@@ -1,7 +1,6 @@
 <?php
 
-namespace Validators;
-
+namespace MyValidator;
 class BookValidator
 {
     protected string $message = 'Поле содержит недопустимые символы. Разрешена только кириллица, цифры и знаки препинания.';

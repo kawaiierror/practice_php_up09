@@ -1,7 +1,6 @@
 <?php
 
-namespace Validators;
-
+namespace MyValidator;
 class ImageValidator
 {
     protected string $message = '';

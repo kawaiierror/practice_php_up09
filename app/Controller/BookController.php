@@ -3,12 +3,8 @@
 namespace Controller;
 
 use Model\Book;
-use Model\Category;
-
-use Src\View;
 use Src\Request;
-use Illuminate\Support\Facades\Storage;
-
+use Src\View;
 
 
 class BookController
@@ -43,9 +39,9 @@ class BookController
         $year  = $_POST['year'] ?? 'Не указан';
         $is_new = $_POST["is_new"] ?? 'Не указано';
 
-        $textValidator = new \Validators\BookValidator();
-        $yearValidator = new \Validators\YearValidator();
-        $imageValidator = new \Validators\ImageValidator();
+        $textValidator = new \MyValidator\BookValidator();
+        $yearValidator = new \MyValidator\YearValidator();
+        $imageValidator = new \MyValidator\ImageValidator();
 
         if (!$book_name || !$textValidator->handle($book_name)) {
             $errors[] = 'Название: ' . $textValidator->getMessage();
@@ -133,7 +129,7 @@ class BookController
         $name = $_POST['name'] ?? null;
 
         if ($name) {
-            $cyrillicValidator = new \Validators\CyrillicValidator();
+            $cyrillicValidator = new \MyValidator\CyrillicValidator();
             if (!$cyrillicValidator->handle($name)) {
                 $_SESSION['error'] = $cyrillicValidator->getMessage();
                 app()->route->redirect('/add_category');
@@ -170,8 +166,8 @@ class BookController
         $errors = [];
 
         if ($request->method === 'POST') {
-            $cyrillic = new \Validators\CyrillicValidator();
-            $yearValid = new \Validators\YearValidator();
+            $cyrillic = new \MyValidator\CyrillicValidator();
+            $yearValid = new \MyValidator\YearValidator();
 
             if (!$cyrillic->handle($name)) {
                 $errors[] = 'Имя должно содержать только кириллицу, пробелы и дефисы';
