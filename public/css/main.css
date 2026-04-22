@@ -126,11 +126,15 @@ th {
 td {
     padding: 5px;
 }
-.book-grid {
-    margin-top: 10px;
-}
 .book-item {
+    display: flex;
+    gap: 20px;
+
+    border: 1px solid gray;
+    border-radius: 15px;
     padding: 15px;
+
+    margin-bottom: 10px;
 }
 
 .book_btn {
@@ -146,7 +150,7 @@ td {
 }
 
 .book_details {
-    margin-left: 8vw;
+    margin-left: 16vw;
     padding: 10px;
     width: 450px;
 }
@@ -159,9 +163,10 @@ td {
 }
 
 .create {
-    margin-left: 9vw;
-    width: 12%;
+    font-size: 20px;
+    width: 22%;
     background-color: dodgerblue;
+    padding: 7px 50px 7px 50px;
 }
 
 .book_detail_img {
@@ -169,7 +174,35 @@ td {
 }
 
 .book_grid {
-    margin-left: 8vw;
+    margin-top: 10px;
+    margin-right: 16vw;
+    margin-left: 16vw;
+}
+
+.book_list_img {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.book-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.book_item_title {
+    font-size: 28px;
+}
+
+.book_item_link {
+    margin-top: 10px;
+}
+
+.book_btn_list {
+    margin-left: 22vw;
+    display: flex;
+    gap: 15px;
 }
 
 .create_book_btn {
