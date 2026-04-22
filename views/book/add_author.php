@@ -1,9 +1,21 @@
 <?php
 ?>
-<?php
-?>
 <h2>Добавление автора</h2>
 <form action="<?= app()->route->getUrl('/add_author') ?>" method="POST">
+    <div>
+        <?php if (!empty($_SESSION['errors'])): ?>
+            <div style="color: red; margin-bottom: 20px;">
+                <ul>
+                    <?php foreach ($_SESSION['errors'] as $error): ?>
+                        <li style="font-weight: bold; margin-bottom: 5px;">
+                            <?= $error ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php unset($_SESSION['errors']); ?>
+        <?php endif; ?>
+    </div>
     <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
     <label style="font-size: 14pt ; margin-top: 15px;" for="name"><strong>Имя:</strong></label>
     <input type="text" name="name" required placeholder="Иван">

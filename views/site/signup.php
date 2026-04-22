@@ -1,7 +1,17 @@
 <h2>Регистрация нового пользователя</h2>
-<h3><?= $message ?? ''; ?></h3>
 <form method="post">
     <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+    <?php if (isset($errors)): ?>
+        <div style=" color: red; margin-bottom: 20px;">
+            <ul style="margin: 0;">
+                <?php foreach ($errors as $fieldErrors): ?>
+                    <?php foreach ($fieldErrors as $error): ?>
+                        <li><?= $error ?></li>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 
     <label>Введите имя <input type="text" name="name" placeholder="имя"></label>
     <label>Введите логин <input type="text" name="login" placeholder="логин"></label>

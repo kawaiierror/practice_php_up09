@@ -32,7 +32,7 @@ class Site
                 'login' => ['required', 'unique:users,login'],
                 'password' => ['required'],
                 'lastname' => ['required'],
-                'patronym' => ['required'],
+                'patronym' => [],
                 'adress' => ['required'],
                 'phone' => ['required'],
             ], [
@@ -40,9 +40,20 @@ class Site
                 'unique' => 'Поле :field должно быть уникально'
             ]);
 
-            if($validator->fails()){
-                return new View('site.signup',
-                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            if ($validator->fails()) {
+                return new View('site.signup', ['errors' => $validator->errors()]);
+            }
+
+            // Проверка кириллицы
+            $cyrillic = new \Validators\CyrillicValidator();
+            $errors = [];
+
+            if (!$cyrillic->handle($request->name)) $errors['name'][] = 'Имя должно быть на кириллице';
+            if (!$cyrillic->handle($request->lastname)) $errors['lastname'][] = 'Фамилия должна быть на кириллице';
+            if ($request->patronym && !$cyrillic->handle($request->patronym)) $errors['patronym'][] = 'Отчество должно быть на кириллице';
+
+            if (!empty($errors)) {
+                return new View('site.signup', ['errors' => $errors]);
             }
 
             if (User::create($request->all())) {

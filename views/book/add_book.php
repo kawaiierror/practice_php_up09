@@ -4,6 +4,18 @@
 <form action="<?= app()->route->getUrl('/add_book') ?>" method="POST" enctype="multipart/form-data">
     <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
 
+    <?php if (!empty($_SESSION['errors'])): ?>
+        <div style="color: red; margin-bottom: 20px;">
+            <ul>
+                <?php foreach ($_SESSION['errors'] as $error): ?>
+                    <li style="font-weight: bold; margin-bottom: 5px;">
+                        <?= $error ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php unset($_SESSION['errors']); ?>
+    <?php endif; ?>
     <input type="text" name="book_name" placeholder="Название книги" required>
 
     <label>Автор:</label>

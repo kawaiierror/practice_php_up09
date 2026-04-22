@@ -34,7 +34,7 @@ class BookController
 
         return new View('book.book_detail', ['book' => $book]);
     }
-    public function create_book(Request $request): string
+    public function create_book(Request $request): void //void
     {
         $book_name   = $_POST['book_name'] ?? 'Без названия';
         $author_id   = $_POST['author_id'] ?? null;
@@ -43,8 +43,24 @@ class BookController
         $year  = $_POST['year'] ?? 'Не указан';
         $is_new = $_POST["is_new"] ?? 'Не указано';
 
+        $textValidator = new \Validators\BookValidator();
+        $yearValidator = new \Validators\YearValidator();
+        $imageValidator = new \Validators\ImageValidator();
+
+        if (!$book_name || !$textValidator->handle($book_name)) {
+            $errors[] = 'Название: ' . $textValidator->getMessage();
+        }
+
+        if ($year && !$yearValidator->handle($year)) {
+            $errors[] = 'Год: ' . $yearValidator->getMessage();
+        }
+
         $url = null;
         if (isset($_FILES['cover_image']) && $_FILES['cover_image']['error'] === UPLOAD_ERR_OK) {
+            if (!$imageValidator->handle($_FILES['cover_image'])) {
+                $errors[] = 'Обложка: ' . $imageValidator->getMessage();
+            }
+
             $file = $_FILES['cover_image'];
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
             $fileName = time() . '.' . $extension;
@@ -58,7 +74,6 @@ class BookController
             $targetPath = $uploadDir . $fileName;
 
             if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-                // Этот путь запишется в базу данных
                 $url = '/uploads/cover_images/' . $fileName;
             }
         }
@@ -73,6 +88,11 @@ class BookController
         $book->is_new       = $is_new;
         $book->status      = 'доступна';
 
+        if (!empty($errors)) {
+            $_SESSION['errors'] = $errors;
+            app()->route->redirect('/add_book');
+            return;
+        }
 
         $book->save();
 
@@ -113,9 +133,17 @@ class BookController
         $name = $_POST['name'] ?? null;
 
         if ($name) {
+            $cyrillicValidator = new \Validators\CyrillicValidator();
+            if (!$cyrillicValidator->handle($name)) {
+                $_SESSION['error'] = $cyrillicValidator->getMessage();
+                app()->route->redirect('/add_category');
+                return;
+            }
+
             $exists = \Model\Category::where('name', $name)->exists();
 
             if ($exists) {
+                $_SESSION['error'] = 'Такая категория уже существует!';
                 app()->route->redirect('/add_category');
                 return;
             }
@@ -139,10 +167,45 @@ class BookController
         $year_of_birth = $_POST['year_of_birth'] ?? null;
         $year_of_death = $_POST['year_of_death'] ?? null;
 
-        if ($name) {
-            $exists = \Model\Author::where('name', $name)->exists();
+        $errors = [];
 
-            if ($exists) {
+        if ($request->method === 'POST') {
+            $cyrillic = new \Validators\CyrillicValidator();
+            $yearValid = new \Validators\YearValidator();
+
+            if (!$cyrillic->handle($name)) {
+                $errors[] = 'Имя должно содержать только кириллицу, пробелы и дефисы';
+            }
+            if (!$cyrillic->handle($lastname)) {
+                $errors[] = 'Фамилия должна содержать только кириллицу, пробелы и дефисы';
+            }
+
+            if (!$yearValid->handle($year_of_birth)) {
+                $errors[] = 'Год рождения должен содержать только цифры (до 4 цифр)';
+            }
+            if ($year_of_death && !$yearValid->handle($year_of_death)) {
+                $errors[] = 'Год смерти должен содержать только цифры (до 4-цифр)';
+            }
+
+            if ($year_of_death && $year_of_birth && $year_of_death < $year_of_birth) {
+                $errors[] = 'Год смерти не может быть раньше года рождения';
+            }
+
+            if (empty($errors)) {
+                $exists = \Model\Author::where([
+                    'name' => $name,
+                    'lastname' => $lastname,
+                    'year_of_birth' => $year_of_birth,
+                    'year_of_death' => $year_of_death,
+                ])->exists();
+
+                if ($exists) {
+                    $errors[] = 'Такой автор уже существует в базе данных';
+                }
+            }
+
+            if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
                 app()->route->redirect('/add_author');
                 return;
             }
